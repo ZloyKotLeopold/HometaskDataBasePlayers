@@ -27,7 +27,7 @@ namespace HometaskDataBasePlayers.Scripts
             QuantityPlayers = 0;
             int criateRandomPlayer = 1;
             int criateMinePlayer = 2;
-            int giveBanPlayer = 3;
+            int banPlayer = 3;
             int removeBanPlayer = 4;
             int removePlayer = 5;
             int exitProgram = 6;
@@ -35,7 +35,7 @@ namespace HometaskDataBasePlayers.Scripts
             Console.WriteLine(
                 $"{criateRandomPlayer} - Сгенерировать рандомных персонажей.\n" +
                 $"{criateMinePlayer} - Создать персонажа cамому.\n" +
-                $"{giveBanPlayer} - Забанить игрока.\n" +
+                $"{banPlayer} - Забанить игрока.\n" +
                 $"{removeBanPlayer} - Снять бан с игрока.\n" +
                 $"{removePlayer} - Удалить игрока.\n" +
                 $"{exitProgram} - Выйти из программы.\n");
@@ -54,18 +54,23 @@ namespace HometaskDataBasePlayers.Scripts
                     QuantityPlayers = (int)ClearAndGetUIntInput("Сколько персонажей вы хотите создать?", maxNumberInput, out numberInput);
                     return;
                 }
+
                 if (numberInput == criateMinePlayer)
                 {
                     maxNumberInput = maxLevel;
                     Level = (int)ClearAndGetUIntInput($"Введите уровень персонажа не болеее {maxLevel}.", maxNumberInput, out numberInput);
                     Name = GetUserInput("Введите имя персонажжа.");
                 }
-                if (numberInput == giveBanPlayer)
+
+                if (numberInput == banPlayer)
                     GiveBanId = (int)ClearAndGetUIntInput("Введите ID персонажа которого вы хотите забанить.", maxNumberInput, out numberInput);
+
                 if ((numberInput == removeBanPlayer))
                     RemoveBanId = (int)ClearAndGetUIntInput("Введите ID персонажа которого вы хотите разбанить.", maxNumberInput, out numberInput);
+
                 if ((numberInput == removePlayer))
                     RemovePlayerId = (int)ClearAndGetUIntInput("Введите ID персонажа которого вы хотите удалить.", maxNumberInput, out numberInput);
+
                 if ((numberInput == exitProgram))
                     IsExit = false;
             }
@@ -108,6 +113,7 @@ namespace HometaskDataBasePlayers.Scripts
         private bool CheckUserInput(string userInput, uint maxNumberInput, out uint numberInput)
         {
             bool isCorrect = uint.TryParse(userInput, out numberInput);
+
             if (isCorrect && numberInput <= maxNumberInput)
                 return true;
             else

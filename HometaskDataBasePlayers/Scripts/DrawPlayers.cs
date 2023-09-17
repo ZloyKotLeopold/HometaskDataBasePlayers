@@ -8,7 +8,6 @@ namespace HometaskDataBasePlayers.Scripts
         public void Draw(PlayerFactory factory)
         {
             Player player;
-
             Dictionary<int, Player> players = factory.Players;
 
             int positionX = 0;

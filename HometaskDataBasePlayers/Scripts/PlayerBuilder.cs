@@ -11,8 +11,9 @@
         {
             int minLevel = 0;
             int maxLevel = 100;
-            if (level > minLevel && level < maxLevel)           
-                _level = level;          
+
+            if (level > minLevel && level < maxLevel)
+                _level = level;
             return this;
         }
 

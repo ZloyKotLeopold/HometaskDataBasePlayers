@@ -19,15 +19,19 @@ namespace HometaskDataBasePlayers
 
                 if (input.QuantityPlayers != NoAction)
                     playerFactory.FillingDataBase(input.QuantityPlayers);
+
                 if (!string.IsNullOrEmpty(input.Name))
                 {
                     playerFactory.PlayerManeger.AddPlayer(input.Level, input.Name);
                     playerFactory.InicializationPlayers();
                 }
+
                 if (input.GiveBanId != NoAction)
                     banned.ManagePlayerBan(playerFactory, input.GiveBanId, true);
+
                 if (input.RemoveBanId != NoAction)
                     banned.ManagePlayerBan(playerFactory, input.RemoveBanId, false);
+
                 if (input.RemovePlayerId != NoAction)
                     playerFactory.PlayerManeger.RemovePlayer(input.RemovePlayerId);
 
