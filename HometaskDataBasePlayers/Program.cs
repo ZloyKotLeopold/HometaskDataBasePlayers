@@ -4,7 +4,7 @@ namespace HometaskDataBasePlayers
 {
     internal class Program
     {
-        private const int NoAction = 0;
+        private const int NO_ACTION = 0;
 
         static void Main()
         {
@@ -17,7 +17,7 @@ namespace HometaskDataBasePlayers
             {
                 input.Input();
 
-                if (input.QuantityPlayers != NoAction)
+                if (input.QuantityPlayers != NO_ACTION)
                     playerFactory.FillingDataBase(input.QuantityPlayers);
 
                 if (!string.IsNullOrEmpty(input.Name))
@@ -26,13 +26,13 @@ namespace HometaskDataBasePlayers
                     playerFactory.InicializationPlayers();
                 }
 
-                if (input.GiveBanId != NoAction)
+                if (input.GiveBanId != NO_ACTION)
                     banned.ManagePlayerBan(playerFactory, input.GiveBanId, true);
 
-                if (input.RemoveBanId != NoAction)
+                if (input.RemoveBanId != NO_ACTION)
                     banned.ManagePlayerBan(playerFactory, input.RemoveBanId, false);
 
-                if (input.RemovePlayerId != NoAction)
+                if (input.RemovePlayerId != NO_ACTION)
                     playerFactory.PlayerManeger.RemovePlayer(input.RemovePlayerId);
 
                 drowPlayers.Draw(playerFactory);
