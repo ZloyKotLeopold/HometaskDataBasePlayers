@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Remoting.Messaging;
 
 namespace HometaskDataBasePlayers.Scripts
 {
@@ -13,18 +12,18 @@ namespace HometaskDataBasePlayers.Scripts
         public int QuantityPlayers { get; private set; }
         public bool IsExit { get; private set; }
 
-        private const int PARAMETR_CRIATRE_RANDOM_PLAYERS = 1;
-        private const int PARAMETR_CRIATE_MY_PLAYER = 2;
-        private const int PARAMETR_GIVE_BAN = 3;
-        private const int PARAMETR_REMOVE_BAN = 4;
-        private const int PARAMETR_REMOVE_PLAYER = 5;
-        private const int PARAMETR_EXIT_PROGRAM = 6;
-        private const string MASSENGE_REMOVE_PLAYER = "Введите ID персонажа которого вы хотите удалить.";
-        private const string MASSENGE_REMOVE_BAN = "Введите ID персонажа которого вы хотите разбанить.";
-        private const string MASSENGE_GIVE_BAN = "Введите ID персонажа которого вы хотите забанить.";
-        private const string MASSENGE_COUNT_CRIATE_PLAYERS = "Сколько персонажей вы хотите создать?";
-        private const string MASSENGE_INPUT_LEVEL = "Введите уровень персонажа не болеее";
-        private const string MASSENGE_INPUT_NAME = "Введите имя персонажжа.";
+        private const int PARAMETER_CRIATRE_RANDOM_PLAYERS = 1;
+        private const int PARAMETER_CRIATE_MY_PLAYER = 2;
+        private const int PARAMETER_GIVE_BAN = 3;
+        private const int PARAMETER_REMOVE_BAN = 4;
+        private const int PARAMETER_REMOVE_PLAYER = 5;
+        private const int PARAMETER_EXIT_PROGRAM = 6;
+        private const string MESSAGE_REMOVE_PLAYER = "Введите ID персонажа которого вы хотите удалить.";
+        private const string MESSAGE_REMOVE_BAN = "Введите ID персонажа которого вы хотите разбанить.";
+        private const string MESSAGE_GIVE_BAN = "Введите ID персонажа которого вы хотите забанить.";
+        private const string MESSAGE_COUNT_CRIATE_PLAYERS = "Сколько персонажей вы хотите создать?";
+        private const string MESSAGE_INPUT_LEVEL = "Введите уровень персонажа не болеее";
+        private const string MESSAGE_INPUT_NAME = "Введите имя персонажжа.";
 
         public UserInput()
         {
@@ -40,12 +39,12 @@ namespace HometaskDataBasePlayers.Scripts
             QuantityPlayers = 0;
 
             Console.WriteLine(
-                $"{PARAMETR_CRIATRE_RANDOM_PLAYERS} - Сгенерировать рандомных персонажей.\n" +
-                $"{PARAMETR_CRIATE_MY_PLAYER} - Создать персонажа cамому.\n" +
-                $"{PARAMETR_GIVE_BAN} - Забанить игрока.\n" +
-                $"{PARAMETR_REMOVE_BAN} - Снять бан с игрока.\n" +
-                $"{PARAMETR_REMOVE_PLAYER} - Удалить игрока.\n" +
-                $"{PARAMETR_EXIT_PROGRAM} - Выйти из программы.\n");
+                $"{PARAMETER_CRIATRE_RANDOM_PLAYERS} - Сгенерировать рандомных персонажей.\n" +
+                $"{PARAMETER_CRIATE_MY_PLAYER} - Создать персонажа cамому.\n" +
+                $"{PARAMETER_GIVE_BAN} - Забанить игрока.\n" +
+                $"{PARAMETER_REMOVE_BAN} - Снять бан с игрока.\n" +
+                $"{PARAMETER_REMOVE_PLAYER} - Удалить игрока.\n" +
+                $"{PARAMETER_EXIT_PROGRAM} - Выйти из программы.\n");
 
             string userInput = Console.ReadLine();
             uint numberInput;
@@ -56,18 +55,18 @@ namespace HometaskDataBasePlayers.Scripts
             {
                 maxNumberInput = uint.MaxValue;
 
-                IsExit = (numberInput == PARAMETR_EXIT_PROGRAM) ? false : true;
+                IsExit = (numberInput == PARAMETER_EXIT_PROGRAM) ? false : true;
 
-                RemovePlayerId = (numberInput == PARAMETR_REMOVE_PLAYER) ? (int)ClearAndGetUIntInput(MASSENGE_REMOVE_PLAYER, maxNumberInput) : 0;
+                RemovePlayerId = (numberInput == PARAMETER_REMOVE_PLAYER) ? (int)ClearAndGetUIntInput(MESSAGE_REMOVE_PLAYER, maxNumberInput) : 0;
 
-                RemoveBanId = (numberInput == PARAMETR_REMOVE_BAN) ? (int)ClearAndGetUIntInput(MASSENGE_REMOVE_BAN, maxNumberInput) : 0;
+                RemoveBanId = (numberInput == PARAMETER_REMOVE_BAN) ? (int)ClearAndGetUIntInput(MESSAGE_REMOVE_BAN, maxNumberInput) : 0;
 
-                GiveBanId = (numberInput == PARAMETR_GIVE_BAN) ? (int)ClearAndGetUIntInput(MASSENGE_GIVE_BAN, maxNumberInput) : 0;
+                GiveBanId = (numberInput == PARAMETER_GIVE_BAN) ? (int)ClearAndGetUIntInput(MESSAGE_GIVE_BAN, maxNumberInput) : 0;
 
-                if (numberInput == PARAMETR_CRIATE_MY_PLAYER)
+                if (numberInput == PARAMETER_CRIATE_MY_PLAYER)
                     CriateMyPlayer(maxNumberInput, maxLevel);
 
-                QuantityPlayers = (numberInput == PARAMETR_CRIATRE_RANDOM_PLAYERS) ? (int)ClearAndGetUIntInput(MASSENGE_COUNT_CRIATE_PLAYERS, maxNumberInput) : 0;
+                QuantityPlayers = (numberInput == PARAMETER_CRIATRE_RANDOM_PLAYERS) ? (int)ClearAndGetUIntInput(MESSAGE_COUNT_CRIATE_PLAYERS, maxNumberInput) : 0;
             }
         }
 
@@ -80,8 +79,8 @@ namespace HometaskDataBasePlayers.Scripts
         private void CriateMyPlayer(uint maxNumberInput, uint maxLevel)
         {
             maxNumberInput = maxLevel;
-            Level = (int)ClearAndGetUIntInput($"{MASSENGE_INPUT_LEVEL} {maxLevel}.", maxNumberInput);
-            Name = GetUserInput(MASSENGE_INPUT_NAME);
+            Level = (int)ClearAndGetUIntInput($"{MESSAGE_INPUT_LEVEL} {maxLevel}.", maxNumberInput);
+            Name = GetUserInput(MESSAGE_INPUT_NAME);
         }
 
         private uint GetUserInput(string messenge, uint maxNumberInput)
@@ -94,10 +93,7 @@ namespace HometaskDataBasePlayers.Scripts
                 Console.WriteLine(messenge);
                 string userInput = Console.ReadLine();
 
-                if (CheckUserInput(userInput, maxNumberInput, out numberInput))
-                {
-                    isCorrect = false;
-                }
+                isCorrect = CheckUserInput(userInput, maxNumberInput, out numberInput) ? false : true;
             }
             return numberInput;
         }
@@ -108,8 +104,9 @@ namespace HometaskDataBasePlayers.Scripts
             Console.WriteLine(messenge);
             string userInput = "";
 
-            for (int i = 0; i <= countTry; countTry--)
+            while (countTry > 0)
             {
+                countTry--;
                 userInput = Console.ReadLine();
 
                 if (!string.IsNullOrEmpty(userInput))
@@ -143,8 +140,8 @@ namespace HometaskDataBasePlayers.Scripts
                 else
                 {
                     Console.WriteLine($"Вы ввели неверное значение, попыток {countTry}");
-                    userInput = Console.ReadLine();
                 }
+                userInput = Console.ReadLine();
             }
             Console.Clear();
             return false;
