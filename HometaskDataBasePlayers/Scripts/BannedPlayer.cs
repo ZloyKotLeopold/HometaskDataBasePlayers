@@ -4,6 +4,7 @@ namespace HometaskDataBasePlayers.Scripts
 {
     public class BannedPlayer
     {
+        private const string MESSAGE_NO_PLAYER = "Такого игрока нет.";
         private Player _player;
 
         private bool TryGetPlayer(PlayerDatabaseManager databaseManager, int id)
@@ -11,7 +12,7 @@ namespace HometaskDataBasePlayers.Scripts
             if (databaseManager.ReadOnlyAllPlayers.TryGetValue(id, out _player))
                 return true;
 
-            Console.WriteLine("Такого игрока нет.");
+            Console.WriteLine(MESSAGE_NO_PLAYER);
             return false;
         }
 

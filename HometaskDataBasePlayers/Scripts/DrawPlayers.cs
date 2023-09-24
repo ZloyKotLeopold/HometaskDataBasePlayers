@@ -6,7 +6,7 @@ using System.Xml.Linq;
 namespace HometaskDataBasePlayers.Scripts
 {
     public class DrawPlayers
-    {
+    {     
         public void Draw(PlayerDatabaseManager databaseManager)
         {
             Player player;
@@ -21,6 +21,7 @@ namespace HometaskDataBasePlayers.Scripts
                 for (int i = 1; i <= players.Count; i++)
                 {
                     players.TryGetValue(i, out player);
+
                     if (player != null)
                         ShowInfo(player);
                 }

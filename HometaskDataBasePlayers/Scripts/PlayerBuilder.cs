@@ -14,6 +14,7 @@
 
             if (level > minLevel && level < maxLevel)
                 _level = level;
+
             return this;
         }
 
@@ -23,6 +24,7 @@
                 _name = name;
             else
                 _name = "nameless";
+
             return this;
         }
 

@@ -6,6 +6,7 @@
         public int Level { get; private set; }
         public string Name { get; private set; }
         public bool IsBanned { get; private set; }
+
         public Player(int id, int level, string name)
         {
             Id = id;
