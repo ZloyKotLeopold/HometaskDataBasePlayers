@@ -7,10 +7,10 @@ namespace HometaskDataBasePlayers.Scripts
 {
     public class DrawPlayers
     {
-        public void Draw(PlayerFactory factory)
+        public void Draw(PlayerDatabaseManager databaseManager)
         {
             Player player;
-            Dictionary<int, Player> players = (Dictionary<int, Player>)factory.ReadOnlyPlayers;
+            Dictionary<int, Player> players = (Dictionary<int, Player>)databaseManager.ReadOnlyAllPlayers;
 
             int positionX = 0;
             int positionY = 15;

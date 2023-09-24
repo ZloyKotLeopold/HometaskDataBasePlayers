@@ -6,24 +6,24 @@ namespace HometaskDataBasePlayers.Scripts
     {
         private Player _player;
 
-        private bool TryGetPlayer(PlayerFactory playerFactory, int id)
+        private bool TryGetPlayer(PlayerDatabaseManager databaseManager, int id)
         {
-            if (playerFactory.ReadOnlyPlayers.TryGetValue(id, out _player))
+            if (databaseManager.ReadOnlyAllPlayers.TryGetValue(id, out _player))
                 return true;
 
             Console.WriteLine("Такого игрока нет.");
             return false;
         }
 
-        public void PlayerGiveBan(PlayerFactory playerFactory, int id)
+        public void PlayerGiveBan(PlayerDatabaseManager databaseManager, int id)
         {
-            if (TryGetPlayer(playerFactory, id))
+            if (TryGetPlayer(databaseManager, id))
                 _player.GiveBanPlayer();
         }
 
-        public void PlayerRemoveBan(PlayerFactory playerFactory, int id)
+        public void PlayerRemoveBan(PlayerDatabaseManager databaseManager, int id)
         {
-            if (TryGetPlayer(playerFactory, id))
+            if (TryGetPlayer(databaseManager, id))
                 _player.RemoveBanPlayer();
         }
     }

@@ -4,33 +4,40 @@ namespace HometaskDataBasePlayers.Scripts
 {
     public class PlayerDatabaseManager
     {
-        private PlayerBuilder _newPlayer;
-        private Dictionary<int, Player> AllPlayers;
+        public PlayerFactory PlayerFactory { get; private set; }
+        private Dictionary<int, Player> _allPlayers;
 
-        public IReadOnlyDictionary<int, Player> ReadOnlyAllPlayers => AllPlayers;
+        public IReadOnlyDictionary<int, Player> ReadOnlyAllPlayers => _allPlayers;
 
         public PlayerDatabaseManager()
         {
-            AllPlayers = new Dictionary<int, Player>();
-            _newPlayer = new PlayerBuilder();
+            PlayerFactory = new PlayerFactory();
+            _allPlayers = new Dictionary<int, Player>();
         }
 
         public void AddPlayer(int level, string name)
         {
-            _newPlayer.SetLevel(level);
-            _newPlayer.SetName(name);
-            Player player = _newPlayer.Build();
-            AllPlayers.Add(player.Id, player);
+            PlayerFactory.BuildNewPlayer.SetLevel(level);
+            PlayerFactory.BuildNewPlayer.SetName(name);
+            Player player = PlayerFactory.BuildNewPlayer.Build();
+
+            if (_allPlayers.ContainsKey(player.Id)) 
+                _allPlayers.Add(PlayerFactory.ReadOnlyPlayers.Count + 1, player);
+            else
+                _allPlayers.Add(player.Id, player);
         }
+
         public void AddPlayer(Player player)
         {
-            if (AllPlayers.ContainsKey(player.Id))
+            if (_allPlayers.ContainsKey(player.Id))
             {
-                RemovePlayer(player.Id);
-                AllPlayers.Add(player.Id, player);
+                _allPlayers.Add(player.Id, player);
+                InicializationPlayers();
             }
         }
 
-        public void RemovePlayer(int id) => AllPlayers.Remove(id);
+        public void RemovePlayer(int id) => _allPlayers.Remove(id);
+
+        public void InicializationPlayers() => _allPlayers = (Dictionary<int, Player>)PlayerFactory.ReadOnlyPlayers;
     }
 }

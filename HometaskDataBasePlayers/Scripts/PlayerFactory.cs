@@ -6,15 +6,17 @@ namespace HometaskDataBasePlayers.Scripts
     public class PlayerFactory
     {
         private Dictionary<int, Player> Players;
-        public PlayerDatabaseManager PlayerManeger { get; private set; }
+        public PlayerBuilder BuildNewPlayer { get; private set; }
         private int _quantityPlayers;
 
         public IReadOnlyDictionary<int, Player> ReadOnlyPlayers => Players;
 
         public PlayerFactory()
         {
-            PlayerManeger = new PlayerDatabaseManager();
+            Players = new Dictionary<int, Player>();
+            BuildNewPlayer = new PlayerBuilder();
         }
+
         public void FillingDataBase(int quantityPlayers)
         {
             Random random = new Random();
@@ -49,15 +51,20 @@ namespace HometaskDataBasePlayers.Scripts
             {
                 int randomLevel = random.Next(1, 100);
                 string randomName = names[random.Next(0, 20)];
-                PlayerManeger.AddPlayer(randomLevel, randomName);
+                AddPlayer(randomLevel, randomName);
             }
-
-            InicializationPlayers();
         }
 
-        public void InicializationPlayers()
+        private void AddPlayer(int level, string name) //PlayerFactory ничего нне знает о PlayerDatabaseManager по этому метод почти дублируется с PlayerDatabaseManager
         {
-            Players = (Dictionary<int, Player>)PlayerManeger.ReadOnlyAllPlayers;
+            BuildNewPlayer.SetLevel(level);
+            BuildNewPlayer.SetName(name);
+            Player player = BuildNewPlayer.Build();
+
+            if (Players.ContainsKey(player.Id))
+                Players.Add(Players.Count + 1, player);
+            else
+                Players.Add(player.Id, player);
         }
     }
 }
