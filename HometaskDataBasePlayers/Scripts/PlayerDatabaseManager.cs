@@ -25,16 +25,7 @@ namespace HometaskDataBasePlayers.Scripts
                 _allPlayers.Add(PlayerFactory.ReadOnlyPlayers.Count + 1, player);
             else
                 _allPlayers.Add(player.Id, player);
-        }
-
-        public void AddPlayer(Player player)
-        {
-            if (_allPlayers.ContainsKey(player.Id))
-            {
-                _allPlayers.Add(player.Id, player);
-                InicializationPlayers();
-            }
-        }
+        }     
 
         public void RemovePlayer(int id) => _allPlayers.Remove(id);
 

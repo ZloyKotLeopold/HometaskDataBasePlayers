@@ -5,15 +5,15 @@ namespace HometaskDataBasePlayers.Scripts
 {
     public class PlayerFactory
     {
-        private Dictionary<int, Player> Players;
+        private Dictionary<int, Player> _players;
         public PlayerBuilder BuildNewPlayer { get; private set; }
         private int _quantityPlayers;
 
-        public IReadOnlyDictionary<int, Player> ReadOnlyPlayers => Players;
+        public IReadOnlyDictionary<int, Player> ReadOnlyPlayers => _players;
 
         public PlayerFactory()
         {
-            Players = new Dictionary<int, Player>();
+            _players = new Dictionary<int, Player>();
             BuildNewPlayer = new PlayerBuilder();
         }
 
@@ -61,10 +61,10 @@ namespace HometaskDataBasePlayers.Scripts
             BuildNewPlayer.SetName(name);
             Player player = BuildNewPlayer.Build();
 
-            if (Players.ContainsKey(player.Id))
-                Players.Add(Players.Count + 1, player);
+            if (_players.ContainsKey(player.Id))
+                _players.Add(_players.Count + 1, player);
             else
-                Players.Add(player.Id, player);
+                _players.Add(player.Id, player);
         }
     }
 }
