@@ -23,10 +23,8 @@ namespace HometaskDataBasePlayers
                     playerDatabaseManager.InicializationPlayers();
                 }
 
-                if (!string.IsNullOrEmpty(input.Name))
-                {
-                    playerDatabaseManager.AddPlayer(input.Level, input.Name);
-                }
+                if (!string.IsNullOrEmpty(input.Name)) 
+                    playerDatabaseManager.AddPlayer(input.Level, input.Name); 
 
                 if (input.GiveBanId != NO_ACTION)
                     banned.PlayerGiveBan(playerDatabaseManager, input.GiveBanId);

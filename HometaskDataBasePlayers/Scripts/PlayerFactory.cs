@@ -55,7 +55,7 @@ namespace HometaskDataBasePlayers.Scripts
             }
         }
 
-        private void AddPlayer(int level, string name) //PlayerFactory ничего нне знает о PlayerDatabaseManager по этому метод почти дублируется с PlayerDatabaseManager
+        private void AddPlayer(int level, string name) //PlayerFactory ничего не знает о PlayerDatabaseManager по этому метод почти дублируется с PlayerDatabaseManager
         {
             BuildNewPlayer.SetLevel(level);
             BuildNewPlayer.SetName(name);
