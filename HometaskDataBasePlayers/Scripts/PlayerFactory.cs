@@ -5,9 +5,11 @@ namespace HometaskDataBasePlayers.Scripts
 {
     public class PlayerFactory
     {
-        public Dictionary<int, Player> Players { get; private set; }
+        private Dictionary<int, Player> Players;
         public PlayerDatabaseManager PlayerManeger { get; private set; }
         private int _quantityPlayers;
+
+        public IReadOnlyDictionary<int, Player> ReadOnlyPlayers => Players;
 
         public PlayerFactory()
         {
@@ -55,7 +57,7 @@ namespace HometaskDataBasePlayers.Scripts
 
         public void InicializationPlayers()
         {
-            Players = PlayerManeger.AllPlayers;
+            Players = (Dictionary<int, Player>)PlayerManeger.ReadOnlyAllPlayers;
         }
     }
 }

@@ -27,10 +27,10 @@ namespace HometaskDataBasePlayers
                 }
 
                 if (input.GiveBanId != NO_ACTION)
-                    banned.ManagePlayerBan(playerFactory, input.GiveBanId, true);
+                    banned.PlayerGiveBan(playerFactory, input.GiveBanId);
 
                 if (input.RemoveBanId != NO_ACTION)
-                    banned.ManagePlayerBan(playerFactory, input.RemoveBanId, false);
+                    banned.PlayerRemoveBan(playerFactory, input.RemoveBanId);
 
                 if (input.RemovePlayerId != NO_ACTION)
                     playerFactory.PlayerManeger.RemovePlayer(input.RemovePlayerId);

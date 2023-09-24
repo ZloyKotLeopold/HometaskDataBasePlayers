@@ -5,7 +5,9 @@ namespace HometaskDataBasePlayers.Scripts
     public class PlayerDatabaseManager
     {
         private PlayerBuilder _newPlayer;
-        public Dictionary<int, Player> AllPlayers { get; private set; }
+        private Dictionary<int, Player> AllPlayers;
+
+        public IReadOnlyDictionary<int, Player> ReadOnlyAllPlayers => AllPlayers;
 
         public PlayerDatabaseManager()
         {

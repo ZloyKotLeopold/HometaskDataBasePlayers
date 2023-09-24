@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
+using System.Xml.Linq;
 
 namespace HometaskDataBasePlayers.Scripts
 {
@@ -8,7 +10,7 @@ namespace HometaskDataBasePlayers.Scripts
         public void Draw(PlayerFactory factory)
         {
             Player player;
-            Dictionary<int, Player> players = factory.Players;
+            Dictionary<int, Player> players = (Dictionary<int, Player>)factory.ReadOnlyPlayers;
 
             int positionX = 0;
             int positionY = 15;
@@ -20,9 +22,17 @@ namespace HometaskDataBasePlayers.Scripts
                 {
                     players.TryGetValue(i, out player);
                     if (player != null)
-                        player.ShowInfo();
+                        ShowInfo(player);
                 }
             }
+        }
+        public void ShowInfo(Player player)
+        {
+            Console.WriteLine(
+                $"ID: {player.Id}\n" +
+                $"Уровень: {player.Level}\n" +
+                $"Имя: {player.Name}\n" +
+                $"Наличие бана: {player.IsBanned}\n");
         }
     }
 }

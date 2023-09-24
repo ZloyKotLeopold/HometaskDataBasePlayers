@@ -12,6 +12,7 @@ namespace HometaskDataBasePlayers.Scripts
         public int QuantityPlayers { get; private set; }
         public bool IsExit { get; private set; }
 
+        #region CONSTANTS
         private const int PARAMETER_CRIATRE_RANDOM_PLAYERS = 1;
         private const int PARAMETER_CRIATE_MY_PLAYER = 2;
         private const int PARAMETER_GIVE_BAN = 3;
@@ -24,6 +25,9 @@ namespace HometaskDataBasePlayers.Scripts
         private const string MESSAGE_COUNT_CRIATE_PLAYERS = "Сколько персонажей вы хотите создать?";
         private const string MESSAGE_INPUT_LEVEL = "Введите уровень персонажа не болеее";
         private const string MESSAGE_INPUT_NAME = "Введите имя персонажжа.";
+        private const string MESSAGE_INPUT_NAME_TRY = "Пожалуйста, введите имя, попыток -";
+        private const string MESSAGE_INPUT_TRY_NUMBER = "Вы ввели неверное значение, попыток";
+        #endregion
 
         public UserInput()
         {
@@ -63,20 +67,21 @@ namespace HometaskDataBasePlayers.Scripts
 
                 GiveBanId = (numberInput == PARAMETER_GIVE_BAN) ? (int)ClearAndGetUIntInput(MESSAGE_GIVE_BAN, maxNumberInput) : 0;
 
-                if (numberInput == PARAMETER_CRIATE_MY_PLAYER)
-                    CriateMyPlayer(maxNumberInput, maxLevel);
-
                 QuantityPlayers = (numberInput == PARAMETER_CRIATRE_RANDOM_PLAYERS) ? (int)ClearAndGetUIntInput(MESSAGE_COUNT_CRIATE_PLAYERS, maxNumberInput) : 0;
+
+                if (numberInput == PARAMETER_CRIATE_MY_PLAYER)
+                    CreateMyPlayer(maxNumberInput, maxLevel);
             }
         }
 
+        #region HELPING_METHODS
         private uint ClearAndGetUIntInput(string message, uint maxNumberInput)
         {
             Console.Clear();
             return GetUserInput(message, maxNumberInput);
         }
 
-        private void CriateMyPlayer(uint maxNumberInput, uint maxLevel)
+        private void CreateMyPlayer(uint maxNumberInput, uint maxLevel)
         {
             maxNumberInput = maxLevel;
             Level = (int)ClearAndGetUIntInput($"{MESSAGE_INPUT_LEVEL} {maxLevel}.", maxNumberInput);
@@ -111,12 +116,11 @@ namespace HometaskDataBasePlayers.Scripts
 
                 if (!string.IsNullOrEmpty(userInput))
                 {
-                    countTry = 0;
                     Console.Clear();
                     return userInput;
                 }
 
-                Console.WriteLine($"Пожалуйста, введите имя, попыток - {countTry}");
+                Console.WriteLine($"{MESSAGE_INPUT_NAME_TRY} {countTry}");
             }
 
             Console.Clear();
@@ -139,13 +143,14 @@ namespace HometaskDataBasePlayers.Scripts
                 }
                 else
                 {
-                    Console.WriteLine($"Вы ввели неверное значение, попыток {countTry}");
+                    Console.WriteLine($"{MESSAGE_INPUT_TRY_NUMBER} {countTry}");
+                    userInput = Console.ReadLine();
                 }
-                userInput = Console.ReadLine();
             }
             Console.Clear();
             return false;
         }
+        #endregion
 
     }
 }
